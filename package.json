@@ -1,0 +1,32 @@
+{
+  "name": "telegram-gemini-bot",
+  "version": "1.0.0",
+  "description": "A beginner-friendly Telegram AI Chatbot built with Node.js and Gemini API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test",
+    "pm2:start": "pm2 start ecosystem.config.cjs",
+    "pm2:stop": "pm2 stop telegram-gemini-bot",
+    "pm2:status": "pm2 status",
+    "pm2:logs": "pm2 logs telegram-gemini-bot"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "gemini",
+    "ai",
+    "grammy",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^2.17.1",
+    "dotenv": "^16.4.7",
+    "grammy": "^1.35.0",
+    "pm2": "^7.0.3"
+  }
+}
