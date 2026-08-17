@@ -2,15 +2,17 @@ import http from 'node:http';
 import { config } from './config.js';
 import { bot } from './bot.js';
 
-// HTTP health check server for cloud hosting (Render Web Service port binding)
-const port = process.env.PORT || 3000;
+// HTTP health check server bound to 0.0.0.0 for Render Web Service port scanning
+const port = process.env.PORT || 10000;
+const host = '0.0.0.0';
+
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Telegram Gemini Bot is active and running!');
 });
 
-server.listen(port, () => {
-  console.log(`Health check server listening on port ${port}`);
+server.listen(port, host, () => {
+  console.log(`Health check server listening on http://${host}:${port}`);
 });
 
 async function main() {
