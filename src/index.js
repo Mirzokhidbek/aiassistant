@@ -1,5 +1,17 @@
+import http from 'node:http';
 import { config } from './config.js';
 import { bot } from './bot.js';
+
+// HTTP health check server for cloud hosting (Render Web Service port binding)
+const port = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Telegram Gemini Bot is active and running!');
+});
+
+server.listen(port, () => {
+  console.log(`Health check server listening on port ${port}`);
+});
 
 async function main() {
   console.log('Starting Telegram bot...');
@@ -23,11 +35,13 @@ async function main() {
 // Handle termination signals gracefully
 process.once('SIGINT', () => {
   console.log('\nStopping bot...');
+  server.close();
   bot.stop();
 });
 
 process.once('SIGTERM', () => {
   console.log('\nStopping bot...');
+  server.close();
   bot.stop();
 });
 
